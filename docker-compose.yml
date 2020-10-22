@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      target: "${APP_ENV:-development}"
+    volumes:
+      - .:/app
+    environment:
+      APP_ENV: "${APP_ENV:-development}"
+    ports:
+      - "8000:8000"
