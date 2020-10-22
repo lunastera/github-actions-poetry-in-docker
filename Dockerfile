@@ -19,7 +19,7 @@ COPY . .
 EXPOSE 8000
 
 # :development
-FROM base as developmnet
+FROM base as development
 RUN poetry install
 CMD ["sh", "entrypoint.sh"]
 
