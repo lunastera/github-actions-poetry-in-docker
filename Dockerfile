@@ -1,3 +1,6 @@
+# env
+ARG APP_ENV=development
+
 # :base
 FROM python:3.7-stretch as base
 
@@ -21,9 +24,11 @@ EXPOSE 8000
 # :development
 FROM base as development
 RUN poetry install
-CMD ["sh", "entrypoint.sh"]
 
 # :production
 FROM base as production
 RUN poetry install --no-dev
-CMD ["sh", "entrypoint.sh"]
+
+# :final
+FROM ${APP_ENV} as final
+CMD ["./docker-entrypoint.sh"]

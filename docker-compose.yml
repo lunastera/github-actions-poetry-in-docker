@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: "${APP_ENV:-development}"
+      args:
+        APP_ENV: "${APP_ENV:-development}"
     volumes:
       - .:/app
     environment:

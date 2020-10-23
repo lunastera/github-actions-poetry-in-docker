@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 export UWSGI_WSGI=gapid:app
 export UWSGI_HTTP=:8000
