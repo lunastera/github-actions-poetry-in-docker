@@ -1,5 +1,6 @@
 # env
 ARG APP_ENV=development
+ARG MAIN_MODULE=gapid
 
 # :base
 FROM python:3.7-stretch as base
@@ -16,8 +17,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 # work dirs
 WORKDIR ${APP_DIR}
-COPY pyproject.toml poetry.lock ./
-COPY . .
+COPY pyproject.toml poetry.lock ${MAIN_MODULE} ./
 
 EXPOSE 8000
 
@@ -31,4 +31,5 @@ RUN poetry install --no-dev
 
 # :final
 FROM ${APP_ENV} as final
+COPY . .
 CMD ["./docker-entrypoint.sh"]
