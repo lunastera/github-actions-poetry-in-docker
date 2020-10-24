@@ -4,7 +4,6 @@ services:
   app:
     build:
       context: .
-      target: "${APP_ENV:-development}"
       args:
         APP_ENV: "${APP_ENV:-development}"
         MAIN_MODULE: "${MAIN_MODULE:-gapid}"
