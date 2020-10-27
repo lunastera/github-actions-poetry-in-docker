@@ -10,7 +10,10 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v2
       - name: Run locally
+        env:
+          DOCKER_BUILDKIT: 1
+          COMPOSE_DOCKER_CLI_BUILD: 1
         run: |
-          DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up -d
+          docker-compose up -d
           docker-compose exec -T app bash -c "while ! >/dev/tcp/localhost/8000; do sleep 3; done"
           curl -fisS http://localhost:8000/
